@@ -1,0 +1,27 @@
+ActsWithComma
+=============
+
+  Rails plugin that accepts numeric value with comma in AR#setter and text_field
+
+
+Example
+=======
+
+1) specified field accepts numeric value with comma too
+
+  class Item < ActiveRecord::Base
+    acts_with_comma :price
+  end
+
+  item = Item.new
+  item.price = "1,234,567"
+  p item.price
+  # => 1234567
+
+2) specified field is automatically printed with comma in text_field
+
+  text_field :item, :price
+  # => <input type="text" value="1,234,567" size="15" name="item[price]" id="item_price"/>
+
+
+Copyright (c) 2008 maiha@wota.jp, released under the MIT license
