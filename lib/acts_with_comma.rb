@@ -29,7 +29,7 @@ module ActsWithComma
     # wrapper to text_field with converting '1234567' to '1,234,567'
     def text_field_with_encode_comma(object_name, method, options = {})
       klass = object_name.to_s.classify.constantize rescue nil
-      if klass and klass.acts_with_comma_columns.include?(method.to_s.intern)
+      if klass and klass.respond_to?(:acts_with_comma_columns) and klass.acts_with_comma_columns.include?(method.to_s.intern)
         options[:value] ||= number_with_delimiter(instance_variable_get("@#{object_name}")[method])
       end
       text_field_without_encode_comma(object_name, method, options)
